@@ -1,12 +1,65 @@
 <html>
-<head>
-<title>
-SetlistFm test
-</title>
-</head>
-<body>
-<input type="text" id="q"/><button text="asdf">Submit</button><br/>
-<textarea id="result" rows="50" cols="50"></textarea>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script src="../scripts/jquery/jquery-1.8.2.js"></script>
+        <script src="../scripts/dummy.js"></script>
+        <script src="../scripts/classes/setlist.js"></script>
+        <script src="../scripts/classes/artist.js"></script>
+        <title>
+            SetlistFm test
+        </title>
+    </head>
+    <body>
+        <input type="text" id="q" value='Tool'/>
+        <button onclick="receiveData()">Submit</button><br/>
+        <textarea id="result" rows="50" cols="50"></textarea>
 
-</body>
+        <script>
+            var me =this;
+            function search(){
+                //var setlistFm = "http://api.setlist.fm/rest/0.1/search/artists.json?artistName=Tool&p=1";
+                var setlistFm = "http://api2.setlist.fm/rest/0.1/search/setlists.json";
+                var term = $("#q");
+                $.ajax({
+                    type: 'GET',
+                    url: setlistFm,
+                    cache: false,
+                    data: {
+                        artistName: term.val()
+                    },
+                    dataType: "jsonp",
+                    crossDomain: true,
+                    success: function(data) {
+                        var setlists = data.setlists
+                        for(var i = 0 ; i < setlists.length ; i++){
+                            var setlistData = setlists[i];
+                            var setlist = new Setlist(setlistData);
+                            var a = 0;
+                        }
+                    },
+                    error: function (error){
+                        var b = 0;
+                    }
+                });
+                var b = 0;
+            }
+
+            function receiveData(){
+                var setlistObjects = new Array();
+                var setlists = data.setlists.setlist;
+                for(var i = 0 ; i < setlists.length ; i++){
+                    var setlistData = setlists[i];
+                    var setlist = new Setlist(setlistData);
+                    setlistObjects.push(setlist);
+                }
+                
+                var a = 0;
+            }
+
+            function aap(){
+                var b = 0;
+                alert("asdf");
+            }
+        </script>
+    </body>
 </html>
